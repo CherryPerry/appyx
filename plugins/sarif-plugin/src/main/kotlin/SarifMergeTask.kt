@@ -6,7 +6,7 @@ import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.SkipWhenEmpty
 import org.gradle.api.tasks.TaskAction
 
-abstract class LintSarifMergeTask : AbstractExecTask<LintSarifMergeTask>(LintSarifMergeTask::class.java) {
+abstract class SarifMergeTask : AbstractExecTask<SarifMergeTask>(SarifMergeTask::class.java) {
 
     @InputFiles
     @SkipWhenEmpty

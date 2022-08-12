@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-parcelize'
+    id 'appyx-report-lint-sarif'
 }
 
 android {
@@ -38,9 +39,6 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion libs.versions.compose.get()
-    }
-    lintOptions {
-        abortOnError false
     }
     packagingOptions {
         exclude "META-INF/AL2.0"

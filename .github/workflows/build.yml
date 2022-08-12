@@ -24,7 +24,8 @@ jobs:
         with:
           arguments: |
             build
-            mergeLint
+            mergeLintSarif
+            --continue
       # checks integrity of release tasks, update publish workflows too if does not work
       - uses: gradle/gradle-build-action@v2
         with:
@@ -50,21 +51,6 @@ jobs:
         with:
           sarif_file: build/lint-merged.sarif
           category: lint
-      - uses: github/codeql-action/upload-sarif@v2
-        if: success() || failure()
-        with:
-          sarif_file: core/build/reports/lint-results-debug.sarif
-          category: core-lint
-      - uses: github/codeql-action/upload-sarif@v2
-        if: success() || failure()
-        with:
-          sarif_file: interop-rx2/build/reports/lint-results-debug.sarif
-          category: interop-rx2-lint
-      - uses: github/codeql-action/upload-sarif@v2
-        if: success() || failure()
-        with:
-          sarif_file: testing-junit4/build/reports/lint-results-debug.sarif
-          category: junit4-lint
       - name: Upload failure artifacts
         if: failure()
         uses: actions/upload-artifact@v3

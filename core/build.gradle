@@ -4,6 +4,8 @@ plugins {
     id 'kotlin-parcelize'
     id 'appyx-publish-android'
     id 'appyx-report-lint-sarif'
+    id 'io.gitlab.arturbosch.detekt'
+    id 'appyx-report-detekt-sarif'
 }
 
 android {
@@ -29,9 +31,6 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion libs.versions.compose.get()
-    }
-    lintOptions {
-        abortOnError false
     }
     testOptions {
         unitTests.all {

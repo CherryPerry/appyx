@@ -3,6 +3,8 @@ plugins {
     id 'kotlin-android'
     id 'appyx-publish-android'
     id 'appyx-report-lint-sarif'
+    id 'io.gitlab.arturbosch.detekt'
+    id 'appyx-report-detekt-sarif'
 }
 
 android {
@@ -22,9 +24,6 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8
         useIR = true
-    }
-    lintOptions {
-        abortOnError false
     }
 }
 

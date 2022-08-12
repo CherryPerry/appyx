@@ -22,7 +22,7 @@ class ReportLintSarifPlugin : Plugin<Project> {
         rootProject.plugins.withId("appyx-collect-lint-sarif") {
             rootProject.tasks.named(
                 CollectLintSarifPlugin.MERGE_TASK_NAME,
-                LintSarifMergeTask::class.java,
+                SarifMergeTask::class.java,
             ) {
                 lintSarifFiles.from(
                     target

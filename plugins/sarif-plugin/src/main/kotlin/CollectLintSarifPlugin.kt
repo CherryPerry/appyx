@@ -5,7 +5,7 @@ import org.gradle.api.plugins.JavaBasePlugin
 class CollectLintSarifPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
-        target.tasks.register(MERGE_TASK_NAME, LintSarifMergeTask::class.java) {
+        target.tasks.register(MERGE_TASK_NAME, SarifMergeTask::class.java) {
             group = JavaBasePlugin.VERIFICATION_GROUP
         }
     }
