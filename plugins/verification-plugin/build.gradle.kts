@@ -2,21 +2,14 @@ import org.gradle.accessors.dm.LibrariesForLibs
 
 val libs = the<LibrariesForLibs>()
 
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-
 plugins {
     `java-gradle-plugin`
     `kotlin-dsl`
 }
 
 dependencies {
-    implementation(libs.android.plugin)
-    implementation("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.21.0")
+    implementation(libs.plugin.android)
+    implementation(libs.plugin.detekt)
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompile::class.java).configureEach {
@@ -29,13 +22,13 @@ gradlePlugin {
             id = "appyx-collect-sarif"
             implementationClass = "CollectSarifPlugin"
         }
-        create("appyx-report-lint-sarif") {
-            id = "appyx-report-lint-sarif"
-            implementationClass = "ReportLintSarifPlugin"
+        create("appyx-lint") {
+            id = "appyx-lint"
+            implementationClass = "LintPlugin"
         }
-        create("appyx-report-detekt-sarif") {
-            id = "appyx-report-detekt-sarif"
-            implementationClass = "ReportDetektSarifPlugin"
+        create("appyx-detekt") {
+            id = "appyx-detekt"
+            implementationClass = "DetektPlugin"
         }
     }
 }

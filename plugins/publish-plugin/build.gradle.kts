@@ -2,21 +2,14 @@ import org.gradle.accessors.dm.LibrariesForLibs
 
 val libs = the<LibrariesForLibs>()
 
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-
 plugins {
     `java-gradle-plugin`
     `kotlin-dsl`
 }
 
 dependencies {
-    implementation(libs.android.plugin)
-    implementation(libs.plugin.kotlinGradle)
+    implementation(libs.plugin.android)
+    implementation(libs.plugin.kotlin)
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompile::class.java).configureEach {

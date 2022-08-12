@@ -4,7 +4,7 @@ import io.gitlab.arturbosch.detekt.report.ReportMergeTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-class ReportLintSarifPlugin : Plugin<Project> {
+class LintPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         target.plugins.withId("com.android.library") {
@@ -17,8 +17,13 @@ class ReportLintSarifPlugin : Plugin<Project> {
 
     private fun collectLintSarif(target: Project) {
         target.extensions.configure<CommonExtension<*, *, *, *>>("android") {
-            lint.sarifReport = true
+            lint {
+                sarifReport = true
+                baseline = target.file("lint-baseline.xml")
+                warningsAsErrors = true
+            }
         }
+
         val rootProject = target.rootProject
         rootProject.plugins.withId("appyx-collect-sarif") {
             rootProject.tasks.named(

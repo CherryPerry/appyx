@@ -5,15 +5,16 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 
-class ReportDetektSarifPlugin : Plugin<Project> {
+class DetektPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
+        target.plugins.apply("io.gitlab.arturbosch.detekt")
         target.plugins.withId("io.gitlab.arturbosch.detekt") {
             target.extensions.configure<DetektExtension> {
+                buildUponDefaultConfig = true
                 baseline = target.file("detekt-baseline.xml")
                 config.from(target.rootProject.file("detekt.yml"))
             }
-
 
             val detektTask = target.tasks.named("detekt", Detekt::class.java)
             detektTask.configure {
@@ -26,9 +27,7 @@ class ReportDetektSarifPlugin : Plugin<Project> {
                     CollectSarifPlugin.MERGE_DETEKT_TASK_NAME,
                     ReportMergeTask::class.java,
                 ) {
-                    input.from(
-                        detektTask.map { it.sarifReportFile }.orNull
-                    )
+                    input.from(detektTask.map { it.sarifReportFile }.orNull)
                     mustRunAfter(detektTask)
                 }
             }

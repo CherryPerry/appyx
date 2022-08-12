@@ -5,9 +5,8 @@ buildscript {
         maven { url 'https://jitpack.io' }
     }
     dependencies {
-        classpath libs.android.plugin
-        classpath libs.kotlin.plugin
-        classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.21.0"
+        classpath libs.plugin.android
+        classpath libs.plugin.kotlin
     }
 }
 

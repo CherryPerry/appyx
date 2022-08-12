@@ -2,8 +2,8 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-parcelize'
-    id 'io.gitlab.arturbosch.detekt'
-    id 'appyx-report-detekt-sarif'
+    id 'appyx-lint'
+    id 'appyx-detekt'
 }
 
 android {
