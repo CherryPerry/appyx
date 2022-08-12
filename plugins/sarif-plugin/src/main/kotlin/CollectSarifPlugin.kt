@@ -16,7 +16,7 @@ class CollectSarifPlugin : Plugin<Project> {
             doLast {
                 val file = output.asFile.get()
                 var text = file.readText()
-                text = text.replace("\"level\": \"warning\",", "\"level\": \"error\"")
+                text = text.replace("\"level\": \"warning\",", "\"level\": \"error\",")
                 file.writeText(text)
             }
         }
