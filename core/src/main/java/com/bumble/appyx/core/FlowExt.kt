@@ -5,6 +5,7 @@ import android.content.Context
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.scan
+import kotlinx.coroutines.flow.stateIn
 
 internal fun <T> Flow<T>.withPrevious(): Flow<CompareValues<T>> =
     scan(CompareValues<T>()) { previous, current -> previous.combine(current) }
@@ -27,4 +28,8 @@ internal class CompareValues<T>(
 
 fun a(context: Context) {
     context.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+}
+
+fun detektFail(a:    Context)      {
+
 }
