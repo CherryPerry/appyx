@@ -25,6 +25,7 @@ jobs:
           arguments: |
             build
             mergeLintSarif
+            mergeDetektSarif
             --continue
       # checks integrity of release tasks, update publish workflows too if does not work
       - uses: gradle/gradle-build-action@v2
@@ -60,7 +61,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v3
         with:
-          name: unit-test-failures
+          name: reports
           path: '**/build/reports'
 
   instrumentation-tests:
