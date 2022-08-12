@@ -13,6 +13,12 @@ class CollectSarifPlugin : Plugin<Project> {
         target.tasks.register(MERGE_DETEKT_TASK_NAME, ReportMergeTask::class.java) {
             group = JavaBasePlugin.VERIFICATION_GROUP
             output.set(project.layout.buildDirectory.file("detekt-merged.sarif"))
+            doLast {
+                val file = output.asFile.get()
+                var text = file.readText()
+                text = text.replace("\"level\": \"warning\",", "\"level\": \"error\"")
+                file.writeText(text)
+            }
         }
     }
 
