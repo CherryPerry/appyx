@@ -25,9 +25,9 @@ tasks.withType(org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompile::class.java).con
 
 gradlePlugin {
     plugins {
-        create("appyx-collect-lint-sarif") {
-            id = "appyx-collect-lint-sarif"
-            implementationClass = "CollectLintSarifPlugin"
+        create("appyx-collect-sarif") {
+            id = "appyx-collect-sarif"
+            implementationClass = "CollectSarifPlugin"
         }
         create("appyx-report-lint-sarif") {
             id = "appyx-report-lint-sarif"
@@ -35,7 +35,7 @@ gradlePlugin {
         }
         create("appyx-report-detekt-sarif") {
             id = "appyx-report-detekt-sarif"
-            implementationClass = "DetektPlugin"
+            implementationClass = "ReportDetektSarifPlugin"
         }
     }
 }

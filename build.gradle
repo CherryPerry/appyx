@@ -12,7 +12,7 @@ buildscript {
 }
 
 plugins {
-    id 'appyx-collect-lint-sarif'
+    id 'appyx-collect-sarif'
 }
 
 task clean(type: Delete) {

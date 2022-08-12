@@ -20,9 +20,9 @@ class ReportLintSarifPlugin : Plugin<Project> {
             lint.sarifReport = true
         }
         val rootProject = target.rootProject
-        rootProject.plugins.withId("appyx-collect-lint-sarif") {
+        rootProject.plugins.withId("appyx-collect-sarif") {
             rootProject.tasks.named(
-                CollectLintSarifPlugin.MERGE_TASK_NAME,
+                CollectSarifPlugin.MERGE_LINT_TASK_NAME,
                 ReportMergeTask::class.java,
             ) {
                 input.from(

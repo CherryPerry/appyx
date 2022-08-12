@@ -3,7 +3,7 @@ import io.gitlab.arturbosch.detekt.report.ReportMergeTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-class DetektPlugin : Plugin<Project> {
+class ReportDetektSarifPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         target.plugins.withId("io.gitlab.arturbosch.detekt") {
@@ -15,7 +15,7 @@ class DetektPlugin : Plugin<Project> {
 
             val rootProject = target.rootProject
 
-            /*rootProject.plugins.withId("appyx-collect-lint-sarif") {
+            /*rootProject.plugins.withId("appyx-collect-sarif") {
                 val mergeTask = rootProject.tasks.named(
                     CollectLintSarifPlugin.MERGE_TASK_NAME,
                     SarifMergeTask::class.java,
@@ -33,9 +33,9 @@ class DetektPlugin : Plugin<Project> {
                 }
             }*/
 
-            rootProject.plugins.withId("appyx-collect-lint-sarif") {
+            rootProject.plugins.withId("appyx-collect-sarif") {
                 rootProject.tasks.named(
-                    CollectLintSarifPlugin.MERGE_TASK_NAME,
+                    CollectSarifPlugin.MERGE_DETEKT_TASK_NAME,
                     ReportMergeTask::class.java,
                 ) {
                     input.from(
