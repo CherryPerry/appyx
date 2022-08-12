@@ -1,5 +1,6 @@
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.gradle.internal.lint.AndroidLintTask
+import io.gitlab.arturbosch.detekt.report.ReportMergeTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -22,9 +23,9 @@ class ReportLintSarifPlugin : Plugin<Project> {
         rootProject.plugins.withId("appyx-collect-lint-sarif") {
             rootProject.tasks.named(
                 CollectLintSarifPlugin.MERGE_TASK_NAME,
-                SarifMergeTask::class.java,
+                ReportMergeTask::class.java,
             ) {
-                lintSarifFiles.from(
+                input.from(
                     target
                         .tasks
                         .named("lintReportDebug", AndroidLintTask::class.java)

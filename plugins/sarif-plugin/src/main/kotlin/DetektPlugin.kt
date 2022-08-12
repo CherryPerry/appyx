@@ -1,4 +1,5 @@
 import io.gitlab.arturbosch.detekt.Detekt
+import io.gitlab.arturbosch.detekt.report.ReportMergeTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -35,9 +36,9 @@ class DetektPlugin : Plugin<Project> {
             rootProject.plugins.withId("appyx-collect-lint-sarif") {
                 rootProject.tasks.named(
                     CollectLintSarifPlugin.MERGE_TASK_NAME,
-                    SarifMergeTask::class.java,
+                    ReportMergeTask::class.java,
                 ) {
-                    lintSarifFiles.from(
+                    input.from(
                         detektTask.map { it.sarifReportFile }
                     )
                 }

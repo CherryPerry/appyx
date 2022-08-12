@@ -27,6 +27,8 @@ abstract class SarifMergeTask : AbstractExecTask<SarifMergeTask>(SarifMergeTask:
                 "@microsoft/sarif-multitool",
                 "merge",
                 "--force",
+                "--merge-runs",
+                "--recurse",
                 "--output-file",
                 mergedSarifFile.get().asFile.absolutePath,
             )
