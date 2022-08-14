@@ -26,7 +26,7 @@ internal class CompareValues<T>(
 }
 
 fun lintError(context: Context) {
-    context.checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    context.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
 }
 
 fun detektIssue(context: Context) {
