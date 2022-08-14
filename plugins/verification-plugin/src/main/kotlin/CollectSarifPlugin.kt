@@ -25,7 +25,6 @@ class CollectSarifPlugin : Plugin<Project> {
             outputFile.writeText(
                 outputFile
                     .readText()
-                    .replace("\"level\": \"warning\",", "\"level\": \"error\",")
                     .replace(rootDir + File.separator, ""),
             )
         }
