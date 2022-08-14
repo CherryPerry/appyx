@@ -1,5 +1,7 @@
 package com.bumble.appyx.core
 
+import android.Manifest
+import android.content.Context
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.scan
@@ -20,5 +22,13 @@ internal class CompareValues<T>(
 
     fun combine(new: T): CompareValues<T> =
         CompareValues(currentNullable, new)
+
+}
+
+fun lintError(context: Context) {
+    context.checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+}
+
+fun detektIssue(context: Context) {
 
 }
