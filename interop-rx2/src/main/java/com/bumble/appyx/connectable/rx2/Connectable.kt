@@ -7,11 +7,3 @@ interface Connectable<Input, Output> : NodeLifecycleAware {
     val input: Relay<Input>
     val output: Relay<Output>
 }
-
-fun a() {
-
-
-
-}
-
-
