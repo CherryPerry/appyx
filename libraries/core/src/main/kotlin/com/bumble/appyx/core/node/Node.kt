@@ -10,10 +10,10 @@ import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.SaverScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import com.bumble.appyx.Appyx
 import com.bumble.appyx.core.BuildConfig
@@ -162,7 +162,7 @@ open class Node @VisibleForTesting internal constructor(
         }
     }
 
-    override val lifecycle: Lifecycle
+    final override val lifecycle: Lifecycle
         get() = nodeLifecycle.lifecycle
 
     override fun updateLifecycleState(state: Lifecycle.State) {
