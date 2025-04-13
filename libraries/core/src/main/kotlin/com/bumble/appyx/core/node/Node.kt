@@ -1,6 +1,9 @@
 package com.bumble.appyx.core.node
 
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContract
 import androidx.annotation.CallSuper
 import androidx.annotation.VisibleForTesting
 import androidx.compose.runtime.Composable
@@ -39,6 +42,7 @@ import com.bumble.appyx.core.state.MutableSavedStateMapImpl
 import com.bumble.appyx.core.state.SavedStateMap
 import com.bumble.appyx.core.store.RetainedInstanceStore
 import kotlinx.coroutines.withContext
+import java.util.concurrent.atomic.AtomicInteger
 
 @Suppress("TooManyFunctions")
 @Stable
@@ -72,13 +76,17 @@ open class Node @VisibleForTesting internal constructor(
             is AncestryInfo.Root -> null
         }
 
+    private val providedIntegrationPoint: IntegrationPoint? = buildContext.integrationPoint
     var integrationPoint: IntegrationPoint = IntegrationPointStub()
-        get() {
-            return if (isRoot) field
-            else parent?.integrationPoint ?: error(
-                "Non-root Node should have a parent"
-            )
-        }
+        get() =
+            when {
+                providedIntegrationPoint != null -> providedIntegrationPoint
+                isRoot -> field
+                else -> parent?.integrationPoint ?: error(
+                    "Non-root Node should have a parent"
+                )
+            }
+        @Deprecated("Overridable for backward compatibility, but should be provided via BuildContext.")
         set(value) {
             check(isRoot) { "Only a root Node can have an integration point" }
             field = value
@@ -228,6 +236,20 @@ open class Node @VisibleForTesting internal constructor(
 
     private fun handleUpNavigationByPlugins(): Boolean =
         plugins<UpNavigationHandler>().any { it.handleUpNavigation() }
+
+    private val nextLocalRequestCode = AtomicInteger();
+    protected fun <I, O> registerActivityForResult(
+        contract: ActivityResultContract<I, O>,
+        callback: ActivityResultCallback<O>,
+    ): ActivityResultLauncher<I> {
+        val key = "node_${id}_rq#${nextLocalRequestCode.getAndIncrement()}"
+        return integrationPoint.activityResultRegistry.register(
+            key,
+            this,
+            contract,
+            callback,
+        )
+    }
 
     companion object {
         // BackPressHandler is correct when only one of its properties is implemented.

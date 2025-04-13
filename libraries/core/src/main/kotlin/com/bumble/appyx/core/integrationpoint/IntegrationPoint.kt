@@ -20,6 +20,8 @@ abstract class IntegrationPoint(
 
     abstract val isChangingConfigurations: Boolean
 
+    abstract val activityResultRegistry: ActivityResultRegistry
+
     fun onSaveInstanceState(outState: Bundle) {
         requestCodeRegistry.onSaveInstanceState(outState)
     }

@@ -67,5 +67,6 @@ dependencies {
     androidTestImplementation(libs.androidx.test.junit)
     androidTestImplementation(libs.compose.ui.test.junit4)
     androidTestImplementation(libs.compose.foundation)
+    androidTestImplementation(project(":libraries:testing-junit4"))
     androidTestImplementation(project(":libraries:testing-ui"))
 }

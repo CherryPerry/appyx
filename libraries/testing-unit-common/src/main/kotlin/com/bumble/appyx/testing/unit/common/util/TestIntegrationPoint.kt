@@ -6,7 +6,7 @@ import com.bumble.appyx.core.integrationpoint.permissionrequester.PermissionRequ
 import com.bumble.appyx.core.navigation.upnavigation.UpNavigationHandler
 
 class TestIntegrationPoint(
-    private val upNavigationHandler: UpNavigationHandler,
+    private val upNavigationHandler: TestUpNavigationHandler = TestUpNavigationHandler(),
     override val isChangingConfigurations: Boolean = false
 ) : IntegrationPoint(savedInstanceState = null), UpNavigationHandler by upNavigationHandler {
 
@@ -17,6 +17,9 @@ class TestIntegrationPoint(
 
     override val permissionRequester: PermissionRequester
         get() = TODO()
+
+    override val activityResultRegistry: TestActivityResultRegistry =
+        TestActivityResultRegistry()
 
     override fun onRootFinished() {
         rootFinished = true

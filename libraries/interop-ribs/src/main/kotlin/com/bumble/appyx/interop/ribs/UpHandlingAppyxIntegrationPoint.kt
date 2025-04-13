@@ -1,6 +1,7 @@
 package com.bumble.appyx.interop.ribs
 
 import com.badoo.ribs.util.RIBs
+import com.bumble.appyx.core.integrationpoint.ActivityResultRegistry
 import com.bumble.appyx.core.integrationpoint.IntegrationPoint
 import com.bumble.appyx.core.integrationpoint.activitystarter.ActivityStarter
 import com.bumble.appyx.core.integrationpoint.permissionrequester.PermissionRequester
@@ -13,6 +14,7 @@ internal class UpHandlingAppyxIntegrationPoint(
     override val activityStarter: ActivityStarter get() = delegate.activityStarter
     override val permissionRequester: PermissionRequester get() = delegate.permissionRequester
     override val isChangingConfigurations: Boolean get() = delegate.isChangingConfigurations
+    override val activityResultRegistry: ActivityResultRegistry get() = delegate.activityResultRegistry
     override fun onRootFinished() = delegate.onRootFinished()
 
     override fun handleUpNavigation() {

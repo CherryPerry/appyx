@@ -61,7 +61,8 @@ internal fun <N : Node> rememberNode(
             .create(
                 buildContext = BuildContext.root(
                     savedStateMap = savedStateMap,
-                    customisations = customisations
+                    customisations = customisations,
+                    integrationPoint = integrationPoint,
                 ),
             )
             .apply { this.integrationPoint = integrationPoint }

@@ -21,6 +21,9 @@ class IntegrationPointStub : IntegrationPoint(savedInstanceState = null) {
     override val isChangingConfigurations: Boolean
         get() = false
 
+    override val activityResultRegistry: ActivityResultRegistry
+        get() = error(ERROR)
+
     override fun handleUpNavigation() {
         error(ERROR)
     }

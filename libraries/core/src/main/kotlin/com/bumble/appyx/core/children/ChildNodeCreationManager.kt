@@ -164,6 +164,8 @@ internal class ChildNodeCreationManager<NavTarget : Any>(
             ancestryInfo = AncestryInfo.Child(parentNode),
             savedStateMap = savedState,
             customisations = customisations.getSubDirectoryOrSelf(parentNode::class),
+            // Rely on the parent's integration point for a while.
+            integrationPoint = null,
         )
 
     private fun childEntry(
